@@ -1,0 +1,97 @@
+<h2>Список программного обеспечения</h2>
+<table class="pharm-table">
+  <thead>
+    <tr>
+      <th class="pharm-table-td">Код ПО</th>
+      <th class="pharm-table-td">Название</th>
+      <th class="pharm-table-td">Версия</th>
+      <th class="pharm-table-td">Лицензии</th>
+      <th class="pharm-table-td">Дата приобретения</th>
+      <th class="pharm-table-td">Код фирмы</th>
+      <th class="pharm-table-td">Код вида</th>
+      <th class="pharm-table-td">Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let software of softwareList; let i = index">
+      <td class="pharm-table-td">{{ software.code }}</td>
+      <td class="pharm-table-td">{{ software.name }}</td>
+      <td class="pharm-table-td">{{ software.version }}</td>
+      <td class="pharm-table-td">{{ software.licenses }}</td>
+      <td class="pharm-table-td">{{ software.purchaseDate | date:'dd.MM.yyyy' }}</td>
+      <td class="pharm-table-td">{{ software.developerCode }}</td>
+      <td class="pharm-table-td">{{ software.typeCode }}</td>
+      <td class="pharm-table-td">
+        <button (click)="editSoftware(i)">Редактировать</button>
+        <button (click)="deleteSoftware(software.code)">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <h4>Добавление ПО</h4>
+  <div class="textboxes">
+    <label>Код ПО</label>
+    <input type="number" [(ngModel)]="newSoftware.code" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Название ПО*</label>
+    <input type="text" [(ngModel)]="newSoftware.name" required>
+  </div>
+  <div class="textboxes">
+    <label>Версия*</label>
+    <input type="text" [(ngModel)]="newSoftware.version" required>
+  </div>
+  <div class="textboxes">
+    <label>Количество лицензий*</label>
+    <input type="number" [(ngModel)]="newSoftware.licenses" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Дата приобретения*</label>
+    <input type="date" [(ngModel)]="newSoftware.purchaseDate">
+  </div>
+  <div class="textboxes">
+    <label>Код фирмы</label>
+    <input type="number" [(ngModel)]="newSoftware.developerCode" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Код вида ПО</label>
+    <input type="number" [(ngModel)]="newSoftware.typeCode" min="0">
+  </div>
+  <button (click)="addSoftware()">Добавить</button>
+</div>
+
+<div *ngIf="editingSoftware">
+  <h4>Редактирование ПО</h4>
+  <div class="textboxes">
+    <label>Код ПО</label>
+    <input type="number" [(ngModel)]="editingSoftware.code" min="0" readonly>
+  </div>
+  <div class="textboxes">
+    <label>Название ПО*</label>
+    <input type="text" [(ngModel)]="editingSoftware.name" required>
+  </div>
+  <div class="textboxes">
+    <label>Версия*</label>
+    <input type="text" [(ngModel)]="editingSoftware.version" required>
+  </div>
+  <div class="textboxes">
+    <label>Количество лицензий*</label>
+    <input type="number" [(ngModel)]="editingSoftware.licenses" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Дата приобретения*</label>
+    <input type="date" [(ngModel)]="editingSoftware.purchaseDate">
+  </div>
+  <div class="textboxes">
+    <label>Код фирмы</label>
+    <input type="number" [(ngModel)]="editingSoftware.developerCode" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Код вида ПО</label>
+    <input type="number" [(ngModel)]="editingSoftware.typeCode" min="0">
+  </div>
+  <button (click)="saveSoftware()">Сохранить</button>
+  <button (click)="cancelEdit()">Отмена</button>
+</div>

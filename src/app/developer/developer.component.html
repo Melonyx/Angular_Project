@@ -1,0 +1,47 @@
+<h2>Список разработчиков</h2>
+<table class="pharm-table">
+  <thead>
+    <tr>
+      <th class="pharm-table-td">Код фирмы</th>
+      <th class="pharm-table-td">Название разработчика</th>
+      <th class="pharm-table-td">Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let developer of developers; let i = index">
+      <td class="pharm-table-td">{{ developer.code }}</td>
+      <td class="pharm-table-td">{{ developer.name }}</td>
+      <td class="pharm-table-td">
+        <button (click)="editDeveloper(i)">Редактировать</button>
+        <button (click)="deleteDeveloper(developer.code)">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <h4>Добавление разработчика</h4>
+  <div class="textboxes">
+    <label>Код фирмы</label>
+    <input type="number" [(ngModel)]="newDeveloper.code" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Название разработчика*</label>
+    <input type="text" [(ngModel)]="newDeveloper.name" required>
+  </div>
+  <button (click)="addDeveloper()">Добавить</button>
+</div>
+
+<div *ngIf="editingDeveloper">
+  <h4>Редактирование разработчика</h4>
+  <div class="textboxes">
+    <label>Код фирмы</label>
+    <input type="number" [(ngModel)]="editingDeveloper.code" min="0" readonly>
+  </div>
+  <div class="textboxes">
+    <label>Название разработчика*</label>
+    <input type="text" [(ngModel)]="editingDeveloper.name" required>
+  </div>
+  <button (click)="saveDeveloper()">Сохранить</button>
+  <button (click)="cancelEdit()">Отмена</button>
+</div>

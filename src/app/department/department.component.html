@@ -1,0 +1,58 @@
+<h2>Список кафедр</h2>
+<table class="pharm-table">
+  <thead>
+    <tr>
+      <th class="pharm-table-td">Код кафедры</th>
+      <th class="pharm-table-td">Название кафедры</th>
+      <th class="pharm-table-td">ФИО заведующего</th>
+      <th class="pharm-table-td">Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let department of departments; let i = index">
+      <td class="pharm-table-td">{{ department.departmentCode }}</td>
+      <td class="pharm-table-td">{{ department.departmentName }}</td>
+      <td class="pharm-table-td">{{ department.headFullName || '-' }}</td>
+      <td class="pharm-table-td">
+        <button (click)="editDepartment(i)">Редактировать</button>
+        <button (click)="deleteDepartment(department.departmentCode)">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div>
+  <h4>Добавление кафедры</h4>
+  <div class="textboxes">
+    <label>Код кафедры</label>
+    <input type="number" [(ngModel)]="newDepartment.departmentCode" min="0">
+  </div>
+  <div class="textboxes">
+    <label>Название кафедры*</label>
+    <input type="text" [(ngModel)]="newDepartment.departmentName" required>
+  </div>
+  <div class="textboxes">
+    <label>ФИО заведующего</label>
+    <input type="text" [(ngModel)]="newDepartment.headFullName">
+  </div>
+  <button (click)="addDepartment()">Добавить</button>
+</div>
+
+<div *ngIf="editingDepartment">
+  <h4>Редактирование кафедры</h4>
+  <div class="textboxes">
+    <label>Код кафедры</label>
+    <input type="number" [(ngModel)]="editingDepartment.departmentCode" 
+           min="0" readonly>
+  </div>
+  <div class="textboxes">
+    <label>Название кафедры*</label>
+    <input type="text" [(ngModel)]="editingDepartment.departmentName" required>
+  </div>
+  <div class="textboxes">
+    <label>ФИО заведующего</label>
+    <input type="text" [(ngModel)]="editingDepartment.headFullName">
+  </div>
+  <button (click)="saveDepartment()">Сохранить</button>
+  <button (click)="cancelEdit()">Отмена</button>
+</div>
